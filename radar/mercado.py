@@ -1,8 +1,8 @@
-"""Inteligencia de mercado: qué piden las ofertas de IA y automatización en Madrid.
+"""Inteligencia de mercado: qué habilidades piden las ofertas analizadas.
 
-Además de puntuar ofertas para mí, el radar apunta qué herramientas y habilidades
-aparecen en cada una. Con las semanas sale un resumen (datos/MERCADO.md) que me
-dice qué conviene aprender y poner en el CV.
+Además de puntuar ofertas, el radar apunta qué herramientas y habilidades
+aparecen en cada una. Con las semanas sale un resumen (datos/MERCADO.md) que
+muestra qué se demanda más.
 
 Reglas de honestidad y privacidad:
 - Solo cuentan las ofertas con descripción completa (las alertas de LinkedIn
@@ -88,7 +88,7 @@ def leer(ruta: Path, dias: int = 30, hoy: date | None = None) -> list[tuple]:
 def escribir_informe(ruta_csv: Path, ruta_md: Path, dias: int = 30) -> str:
     filas = leer(ruta_csv, dias)
     ranking, n = top(filas)
-    lineas = [f"# Qué piden las ofertas de IA y automatización en Madrid", "",
+    lineas = [f"# Qué habilidades piden las ofertas analizadas", "",
               f"Últimos {dias} días · **{n} ofertas** con descripción completa · actualizado {date.today():%d/%m/%Y}", ""]
     if n < 20:
         lineas += [f"> Aviso: con solo {n} ofertas los porcentajes son orientativos. "

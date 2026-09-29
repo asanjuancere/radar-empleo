@@ -16,12 +16,12 @@ from .modelo import Oferta
 API = "https://api.adzuna.com/v1/api/jobs/es/search/1"
 
 
-def buscar(app_id: str, app_key: str, consultas: list[str], donde: str = "Madrid",
+def buscar(app_id: str, app_key: str, consultas: list[str], donde: str = "",
            max_dias: int = 2, por_consulta: int = 30) -> list[Oferta]:
     ofertas: dict[str, Oferta] = {}
     for q in consultas:
         params = urllib.parse.urlencode({
-            "app_id": app_id, "app_key": app_key, "what": q, "where": donde,
+            "app_id": app_id, "app_key": app_key, "what": q, **({"where": donde} if donde else {}),
             "max_days_old": max_dias, "results_per_page": por_consulta,
             "sort_by": "date", "content-type": "application/json",
         })

@@ -4,7 +4,9 @@
 
 Cada mañana revisa las ofertas nuevas, las puntúa con IA según **un criterio propio** y envía por email solo las que merecen la pena, con el porqué y un argumento para la candidatura.
 
-Es una herramienta personal de seguimiento de ofertas. El criterio (perfil y rúbrica) es privado y se carga desde secretos de GitHub; este repositorio incluye **ejemplos inventados** para que cualquiera pueda probarlo. Además de puntuar, **apunta qué herramientas y habilidades piden** las ofertas y con las semanas publica un resumen del mercado: [`datos/MERCADO.md`](datos/MERCADO.md).
+Es una herramienta de seguimiento de ofertas. El criterio (perfil y rúbrica) es privado y se carga desde secretos de GitHub; este repositorio incluye **ejemplos inventados** para que cualquiera pueda probarlo. Además de puntuar, **apunta qué herramientas y habilidades piden** las ofertas y con las semanas publica un resumen del mercado: [`datos/MERCADO.md`](datos/MERCADO.md).
+
+**Documentación completa:** [Cómo está hecho, paso a paso](docs/ARQUITECTURA.md) (fuentes, reglas, puntuación con IA, evals, pruebas, automatización, privacidad, costes y límites).
 
 ## Cómo comprobar que funciona
 
@@ -18,7 +20,7 @@ Es una herramienta personal de seguimiento de ofertas. El criterio (perfil y rú
 
 - [x] Estructura, reglas de descarte y puntuación con IA (tool use, salida estructurada)
 - [x] Ejecución automática en GitHub Actions y pruebas automáticas
-- [x] Evals: script que compara la nota de la IA con la mía
+- [x] Evals: script que compara la nota de la IA con la nota manual de referencia
 - [x] Extracción de habilidades e informe de mercado
 - [ ] Conectar las fuentes reales (alertas de LinkedIn por email y API de Adzuna)
 - [ ] Primer eval con 30 ofertas puntuadas a mano → resultados en `evals/resultados.md`
@@ -37,6 +39,8 @@ Es una herramienta personal de seguimiento de ofertas. El criterio (perfil y rú
 | Archivo | Qué hace |
 |---|---|
 | `main.py` | Orquesta todo el proceso |
+| `evaluar_oferta.py` | El «botón»: evalúa una oferta pegada a mano y la envía por email |
+| `radar/empresa.py` | Estudio breve de la empresa con búsqueda web |
 | `radar/linkedin_email.py` | Lee las alertas de LinkedIn del buzón y extrae título, empresa y ubicación |
 | `radar/adzuna.py` | Consulta la API oficial de Adzuna (incluye extracto de la descripción) |
 | `radar/puntuar.py` | Filtro por reglas + evaluación con Claude y salida estructurada |
@@ -45,7 +49,8 @@ Es una herramienta personal de seguimiento de ofertas. El criterio (perfil y rú
 | `rubrica.ejemplo.md` · `perfil.ejemplo.md` | Ejemplos inventados; el criterio real es privado (secretos de GitHub) |
 | `evals/` | Conjunto etiquetado y script que mide si la IA acierta |
 | `tests/` | Pruebas que se ejecutan antes de cada ejecución |
-| `.github/workflows/` | La ejecución diaria automática |
+| `docs/` | Documentación técnica completa |
+| `.github/workflows/` | La ejecución diaria automática y el botón |
 
 ## Cómo usarlo con tu propio criterio
 
@@ -75,14 +80,14 @@ Cada oferta con descripción completa aporta sus habilidades (n8n, Power Automat
 - Solo se guarda fecha, huella de la oferta, habilidad y nivel. Ni empresas, ni títulos, ni enlaces.
 - Con pocas ofertas el informe avisa de que los porcentajes son orientativos.
 
-## Evals: ¿puntúa como yo?
+## Evals: ¿puntúa como su dueño?
 
-Puntúo a mano un conjunto de ofertas y `evals/evaluar.py` compara mis notas con las de la IA:
+Se puntúa a mano un conjunto de ofertas y `evals/evaluar.py` compara esas notas con las de la IA:
 
 - error medio en puntos,
 - acierto a ±2 puntos,
 - acierto en la decisión *aplicar / no aplicar*,
-- **falsos negativos**: ofertas buenas que la IA descartaría. Es la métrica que más vigilo, porque son oportunidades perdidas.
+- **falsos negativos**: ofertas buenas que la IA descartaría. Es la métrica más importante, porque son oportunidades perdidas.
 
 Cualquier cambio de prompt o de modelo se valida con el eval antes de darlo por bueno.
 
@@ -98,4 +103,4 @@ python -m pytest -q tests
 
 - Juez calibrado: comparar varios modelos (Haiku vs Sonnet) en coste y precisión con el mismo eval.
 - Borrador de mensaje al reclutador para las ofertas con nota alta.
-- Aprender de mis decisiones: si aplico o descarto, ajustar la rúbrica.
+- Aprender de las decisiones del usuario: si aplica o descarta, ajustar la rúbrica.

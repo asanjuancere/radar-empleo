@@ -1,10 +1,10 @@
 """Salida: el resumen diario por email y las métricas públicas.
 
-Privacidad: el repositorio es público, así que NO se publican las ofertas ni mis
-notas (se vería qué busco y dónde). Solo se guardan métricas
-agregadas (cuántas ofertas, cuántas buenas, coste). El detalle llega a mi email.
+Privacidad: el repositorio puede ser público, así que NO se publican las ofertas
+ni las notas. Solo se guardan métricas agregadas (cuántas ofertas, cuántas
+buenas, coste). El detalle llega por email.
 
-Diseño del email: mismos colores y tipografía que mi web (verde sobrio sobre
+Diseño del email: mismos colores y tipografía que la web del autor (verde sobrio sobre
 crema, títulos con serif). Los emails no cargan fuentes web, así que se usan
 Georgia (títulos) y Arial (texto), que existen en cualquier programa de correo.
 """

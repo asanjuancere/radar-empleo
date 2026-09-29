@@ -1,4 +1,4 @@
-"""El cerebro: Claude puntúa cada oferta según MI rúbrica y MI perfil.
+"""El cerebro: Claude puntúa cada oferta según la rúbrica y el perfil configurados.
 
 Decisiones de diseño (explicadas en el README):
 - Filtro previo por reglas: lo obvio (p. ej. puestos senior) se descarta

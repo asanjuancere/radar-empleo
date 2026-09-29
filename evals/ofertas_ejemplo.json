@@ -1,0 +1,16 @@
+[
+ {"id": "ej-01", "fuente": "manual", "titulo": "Junior AI Operations Specialist", "empresa": "Startup de software (ficticia)", "ubicacion": "Ciudad Ejemplo (presencial)", "url": "",
+  "descripcion": "Rol junior 'builder-first' en un equipo de IA. Identificar cuellos de botella y resolverlos combinando IA con herramientas no-code/low-code; desplegar agentes con Claude y OpenAI; consultoría interna; pasar de idea a prototipo en días. Requisitos: experiencia práctica con APIs de LLMs y prompt engineering; nociones de Zapier, Make o Retool. Valoran lo que sabes construir por encima de títulos."},
+ {"id": "ej-02", "fuente": "manual", "titulo": "Automation & Analytics Specialist", "empresa": "Empresa industrial (ficticia)", "ubicacion": "Ciudad Ejemplo (60 % teletrabajo)", "url": "",
+  "descripcion": "Implantar casos de uso de automatización e IA en distintas áreas con Power Platform, n8n y Power BI; consultor interno; stakeholders internacionales. Requisitos: titulación en informática o ingeniería; 3+ años en analítica, BI o automatización; inglés y español fluidos."},
+ {"id": "ej-03", "fuente": "manual", "titulo": "Junior Process Automation Developer", "empresa": "Consultora (ficticia)", "ubicacion": "Ciudad Ejemplo", "url": "",
+  "descripcion": "Desarrollar y mantener agentes de IA y flujos automatizados; construir pequeñas apps internas. Requisitos: ingeniería informática o equivalente; 1-2 años con Python o JavaScript en proyectos reales; herramientas low-code; LLMs (prompting, agentes, function calling); APIs REST."},
+ {"id": "ej-04", "fuente": "manual", "titulo": "AI Product Specialist", "empresa": "Aseguradora (ficticia)", "ubicacion": "Ciudad Ejemplo", "url": "",
+  "descripcion": "Configuración de chatbots, copilotos y flujos de automatización; prototipos y pruebas de concepto; seguimiento de KPIs. Requisitos: grado en informática o datos; 3 años en desarrollo o automatización; Python y Pandas; cloud; valorable Power Automate y Copilot Studio; inglés B2."},
+ {"id": "ej-05", "fuente": "manual", "titulo": "Microsoft Copilot Specialist", "empresa": "Consultora IT (ficticia)", "ubicacion": "Ciudad Ejemplo (híbrido)", "url": "",
+  "descripcion": "Diseñar y mantener agentes con Microsoft 365 Copilot y Copilot Studio; gobierno y seguridad; formación a usuarios de negocio. Requisitos: experiencia sólida en Copilot Studio, Power Apps, Power Automate y Dataverse; prompt engineering; inglés B2."},
+ {"id": "ej-06", "fuente": "manual", "titulo": "Consultor/a de Automatización de Procesos", "empresa": "Gran consultora (ficticia)", "ubicacion": "Ciudad Ejemplo", "url": "",
+  "descripcion": "Solo para empleados de la propia empresa (movilidad interna). Análisis AS-IS/TO-BE, process mining, RPA con UiPath o Power Automate. Requisitos: 4+ años en transformación digital o RPA; inglés fluido."},
+ {"id": "ej-07", "fuente": "manual", "titulo": "Analista de Riesgos (ejemplo de puesto no deseado)", "empresa": "Entidad ficticia", "ubicacion": "Ciudad Ejemplo", "url": "",
+  "descripcion": "Análisis de solicitudes, estados financieros y participación en comités de riesgo."}
+]

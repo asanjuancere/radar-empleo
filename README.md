@@ -52,15 +52,20 @@ Es una herramienta de seguimiento de ofertas. El criterio (perfil y rúbrica) es
 | `docs/` | Documentación técnica completa |
 | `.github/workflows/` | La ejecución diaria automática y el botón |
 
-## Cómo usarlo con tu propio criterio
+## Cómo se configura (referencia)
 
-1. Haz un *fork* de este repositorio.
-2. Escribe tu perfil y tu rúbrica (parte de `perfil.ejemplo.md` y `rubrica.ejemplo.md`).
-3. En *Settings → Secrets and variables → Actions* añade los secretos: `ANTHROPIC_API_KEY`, `PERFIL`, `RUBRICA` y, para las fuentes, `GMAIL_USUARIO`, `GMAIL_CLAVE_APP` (contraseña de aplicación de Google), `ADZUNA_APP_ID` y `ADZUNA_APP_KEY`. Opcionales: `DESCARTE_EXTRA` (una expresión regular de puestos a descartar sin gastar IA).
-4. Crea alertas de empleo en LinkedIn con tu correo.
-5. En la pestaña *Actions*, lanza el flujo a mano con *Run workflow*. Desde entonces se ejecuta solo cada día laborable.
+Pasos que sigue el autor en su copia privada, descritos para que se entienda el diseño:
+
+1. Escribir el perfil y tu rúbrica (parte de `perfil.ejemplo.md` y `rubrica.ejemplo.md`).
+2. En *Settings → Secrets and variables → Actions* añadir los secretos: `ANTHROPIC_API_KEY`, `PERFIL`, `RUBRICA` y, para las fuentes, `GMAIL_USUARIO`, `GMAIL_CLAVE_APP` (contraseña de aplicación de Google), `ADZUNA_APP_ID` y `ADZUNA_APP_KEY`. Opcionales: `DESCARTE_EXTRA` (una expresión regular de puestos a descartar sin gastar IA).
+3. Crear alertas de empleo en LinkedIn con tu correo.
+4. En la pestaña *Actions*, lanzar el flujo a mano con *Run workflow*. Desde entonces se ejecuta solo cada día laborable.
 
 Sin la clave de Anthropic el flujo funciona en modo demo. Coste con clave: unos pocos euros al mes.
+
+## Licencia
+
+Código publicado para consulta y evaluación. Todos los derechos reservados: para cualquier otro uso hace falta permiso escrito del autor. Ver [`LICENSE`](LICENSE).
 
 ## Decisiones de diseño
 

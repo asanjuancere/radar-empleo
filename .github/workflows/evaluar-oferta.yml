@@ -1,0 +1,37 @@
+# El «botón»: evalúa una oferta que tú pegas y te manda el resultado por email.
+# Actions -> Evaluar una oferta -> Run workflow -> rellenar las casillas.
+name: Evaluar una oferta
+
+on:
+  workflow_dispatch:
+    inputs:
+      titulo:
+        description: "Título del puesto"
+        required: true
+      empresa:
+        description: "Empresa"
+        required: false
+      texto:
+        description: "Texto de la oferta (pégalo entero)"
+        required: true
+
+jobs:
+  evaluar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Evaluar y enviar por email
+        env:
+          OFERTA_TITULO: ${{ inputs.titulo }}
+          OFERTA_EMPRESA: ${{ inputs.empresa }}
+          OFERTA_TEXTO: ${{ inputs.texto }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GMAIL_USUARIO: ${{ secrets.GMAIL_USUARIO }}
+          GMAIL_CLAVE_APP: ${{ secrets.GMAIL_CLAVE_APP }}
+          PERFIL: ${{ secrets.PERFIL }}
+          RUBRICA: ${{ secrets.RUBRICA }}
+        run: python evaluar_oferta.py

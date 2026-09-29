@@ -3,7 +3,7 @@ name: Radar de empleo
 
 on:
   schedule:
-    - cron: "15 6 * * 1-5"   # 06:15 UTC = 08:15 en Madrid en verano
+    - cron: "15 6 * * 1-5"   # 06:15 UTC = 08:15 hora de verano en España
   workflow_dispatch: {}       # botón "Run workflow" para lanzarlo a mano
 
 permissions:

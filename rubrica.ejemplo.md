@@ -1,25 +1,25 @@
-# Rúbrica de ejemplo (inventada)
+# Rúbrica de ejemplo (ficticia)
 
-> Ejemplo ficticio. La rúbrica real es privada: secreto `RUBRICA` de GitHub o archivo local `rubrica.md` (ignorado por git).
+> Ejemplo inventado que muestra el formato. La rúbrica real es privada: secreto `RUBRICA` de GitHub o archivo local `rubrica.md` (ignorado por git).
 
-Criterio con el que la IA puntúa cada oferta de 0 a 10.
+Sirve para puntuar cada oferta de 0 a 10. Cada persona escribe la suya.
 
 ## Una oferta de 10
-Un trabajo dedicado casi por completo a construir soluciones con IA y automatización para hacer más eficientes los procesos de una empresa.
+Un puesto centrado en automatizar procesos de empresa, en una compañía con equipo técnico y trato directo con las áreas de negocio.
 
 ## Una oferta de 0
-Un puesto sin relación con la IA ni la automatización, o de un área que el candidato quiere dejar.
+Un puesto sin relación con el objetivo profesional de la persona.
 
 ## Señales que suben la nota
-- Construir frente a solo recomendar o presentar.
-- Stack: API de LLMs, agentes, n8n, Make, Zapier, Power Automate.
-- Trato directo con negocio y usuarios internos.
+- Se construye algo, no solo se recomienda.
+- Se mencionan herramientas conocidas de automatización.
+- Hay formación y acompañamiento en el puesto.
 
 ## Señales que bajan la nota
-- Exige varios años de programación como requisito excluyente.
-- Puesto senior o de programación pura.
+- Pide mucha más experiencia que la de la persona.
+- La descripción es vaga y no explica el trabajo diario.
 
 ## Datos que también debe devolver
 - Encaje con el perfil: qué encaja y qué falta.
-- Probabilidad realista de entrevista (alta / media / baja).
+- Probabilidad realista de entrevista (alta, media o baja).
 - Un argumento concreto para el mensaje al reclutador.

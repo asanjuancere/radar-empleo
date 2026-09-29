@@ -19,7 +19,7 @@ import os
 import sys
 from pathlib import Path
 
-from radar import adzuna, informe, linkedin_email, mercado, puntuar
+from radar import adzuna, empresa, informe, linkedin_email, mercado, puntuar
 from radar.modelo import Oferta
 
 RAIZ = Path(__file__).resolve().parent
@@ -100,10 +100,13 @@ def main() -> int:
     for o in nuevas:
         try:
             o.evaluacion = puntuar.evaluar(cliente, o)
+            if not args.demo and o.nota >= 7:
+                o.evaluacion["estudio_empresa"] = empresa.estudio(cliente, o.empresa, o.titulo)
             evaluaciones.append(o.evaluacion)
-            print(f"  {o.nota:>2}/10  {o.titulo[:60]} — {o.empresa}")
+            if args.demo:  # en ejecuciones reales NO se imprime nada de las ofertas (los registros pueden ser públicos)
+                print(f"  {o.nota:>2}/10  {o.titulo[:60]} — {o.empresa}")
         except Exception as e:  # una oferta rara no debe tumbar toda la ejecución
-            print(f"  ERROR evaluando {o.id}: {e}", file=sys.stderr)
+            print(f"  ERROR evaluando una oferta: {type(e).__name__}", file=sys.stderr)
 
     coste = puntuar.coste(evaluaciones)
     cuerpo = informe.html_resumen(nuevas, coste)

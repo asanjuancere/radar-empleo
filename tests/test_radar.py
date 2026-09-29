@@ -101,3 +101,27 @@ def test_informe_md(tmp_path):
     mercado.guardar(csv_, mercado.registros([_oferta("a", ["n8n"])], huella=lambda x: x))
     md = mercado.escribir_informe(csv_, tmp_path / "M.md")
     assert "n8n" in md and "orientativos" in md
+
+
+# ---- Email y estudio de empresa ----
+from radar import empresa, informe  # noqa: E402
+
+
+def test_tarjeta_escapa_html_y_enlaza_glassdoor():
+    o = Oferta(id="x", fuente="manual", titulo="<b>Puesto</b>", empresa="Acme & Co", url="https://ejemplo.com/o")
+    o.evaluacion = {"puntuacion": 8, "veredicto": "aplicar", "motivo": "ok", "probabilidad_entrevista": "media",
+                    "argumento_carta": "Idea", "estudio_empresa": "Resumen"}
+    h = informe.tarjeta(o)
+    assert "<b>Puesto</b>" not in h and "&lt;b&gt;Puesto" in h
+    assert "glassdoor.es" in h and "Acme+%26+Co" in h and "Sobre la empresa" in h
+
+
+def test_estudio_devuelve_vacio_si_falla():
+    class Roto:
+        class messages:
+            @staticmethod
+            def create(**kw):
+                raise RuntimeError("sin red")
+
+    assert empresa.estudio(Roto(), "Acme", "Puesto") == ""
+    assert empresa.estudio(Roto(), "", "Puesto") == ""

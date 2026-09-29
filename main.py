@@ -3,8 +3,8 @@
 Se ejecuta cada mañana en GitHub Actions (o a mano en local):
   1. Recoge ofertas nuevas (alertas de LinkedIn por email + API de Adzuna)
   2. Quita las ya vistas otros días
-  3. Claude las puntúa con mi rúbrica
-  4. Me envía un resumen por email y guarda métricas agregadas
+  3. Claude las puntúa con la rúbrica configurada
+  4. Envía un resumen por email y guarda métricas agregadas
 
 Uso:
   python main.py                 # ejecución real (usa variables de entorno)
@@ -27,12 +27,12 @@ VISTOS = RAIZ / "datos" / "vistos.json"
 METRICAS = RAIZ / "datos" / "metricas.csv"
 HABILIDADES = RAIZ / "datos" / "habilidades.csv"
 MERCADO = RAIZ / "datos" / "MERCADO.md"
-CONSULTAS_ADZUNA = os.getenv("CONSULTAS_ADZUNA", "automatización IA|AI automation|n8n").split("|")
+CONSULTAS_ADZUNA = os.getenv("CONSULTAS_ADZUNA", "automatización procesos|inteligencia artificial").split("|")
 
 
 def huella(id_: str) -> str:
-    """Guardamos una huella del id, no el id: el repo es público y no quiero
-    que se pueda saber a qué ofertas exactas estoy mirando."""
+    """Guardamos una huella (hash) del id, no el id: así el repositorio no expone
+    qué ofertas concretas se han consultado."""
     return hashlib.sha256(id_.encode()).hexdigest()[:16]
 
 

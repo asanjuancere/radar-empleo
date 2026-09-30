@@ -142,3 +142,21 @@ Con el modelo actual y unas decenas de ofertas al día, el gasto de IA es de uno
 ## 20. Cómo ampliarlo
 
 Para añadir una fuente (por ejemplo, otra web de empleo con API): crear un archivo en `radar/` que devuelva una lista de `Oferta`, llamarlo desde `recoger()` en `main.py` y añadir una prueba con datos ficticios. El resto del sistema (reglas, puntuación, email, métricas) funciona sin cambios.
+
+## 21. Ampliaciones de la copia privada
+
+Sobre esta base, el autor ha construido ampliaciones en su copia privada (con datos reales). Se describen aquí para que se entienda el diseño. Su estado, con honestidad: el núcleo con alertas de LinkedIn, la calibración y el aviso de fallos están **verificados** en ejecución real; el resto está **construido y pendiente de verificar** de extremo a extremo.
+
+**21.1 Webs de empresas como fuente.** Una lista privada de empresas objetivo se revisa por lotes rotativos (unas pocas al día, para acotar el coste). Para cada empresa, Claude usa la búsqueda web de la API para localizar en su página de empleo oficial las vacantes abiertas que encajan con el perfil. No se accede a LinkedIn ni a portales de empleo, y el texto de las webs se trata como datos, nunca como instrucciones (defensa contra inyección de instrucciones). Estado: el descubrimiento está verificado.
+
+**21.2 Segunda pasada.** La alerta de LinkedIn solo trae título y empresa, así que la primera nota es orientativa. Si una oferta supera el umbral, se busca esa misma oferta en la web oficial de la empresa; si aparece, se puntúa otra vez con la descripción y el sueldo publicados. Si no aparece, se conserva la primera nota. Estado: pendiente de verificar.
+
+**21.3 Aprendizaje con ejemplos.** El modelo no se entrena solo. Lo que sí se puede hacer es enseñarle con ejemplos: las ofertas que el autor ha puntuado a mano se incluyen, repartidas de la nota más baja a la más alta, en el prompt de cada evaluación. Para medir sin trampa, la calibración desactiva los ejemplos y nunca evalúa una oferta que ya está en el prompt. Estado: pendiente de verificar.
+
+**21.4 Candidatura a medida.** Para las ofertas que superan el umbral, una segunda llamada con salida estructurada genera un borrador de mensaje, los logros del CV a destacar, el rol de la persona a la que escribir y qué cuidar. Solo usa hechos del CV real y el programa **nunca envía nada**: el autor lo revisa y lo envía. Estado: pendiente de verificar.
+
+**21.5 Seguimiento y entrevista.** Un botón registra cada candidatura (empresa, puesto y estado). Con ese registro, el radar no vuelve a proponer lo ya aplicado, recuerda hacer seguimiento a los 7 días y calcula cuántas candidaturas llegan a entrevista. Otro botón genera un guion de entrevista a demanda. Estado: pendiente de verificar.
+
+**21.6 Avisos.** Si una ejecución falla, llega un email con el enlace al registro (verificado). Los viernes llega un resumen semanal con las habilidades más pedidas que faltan en el CV. Si la cuenta de la API se queda sin saldo, la ejecución se detiene y avisa.
+
+**21.7 Fiabilidad.** Solo se marcan como «vistas» las ofertas que se llegaron a evaluar: si la evaluación falla, se reintentan en la siguiente ejecución en lugar de perderse. Este fallo se encontró al probar el flujo real, y es un buen ejemplo de por qué se prueba con la API de verdad y no solo con simulaciones.

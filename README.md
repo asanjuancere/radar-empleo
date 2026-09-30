@@ -22,8 +22,9 @@ Es una herramienta de seguimiento de ofertas. El criterio (perfil y rúbrica) es
 - [x] Ejecución automática en GitHub Actions y pruebas automáticas
 - [x] Evals: script que compara la nota de la IA con la nota manual de referencia
 - [x] Extracción de habilidades e informe de mercado
-- [ ] Conectar las fuentes reales (alertas de LinkedIn por email y API de Adzuna)
-- [ ] Primer eval con 30 ofertas puntuadas a mano → resultados en `evals/resultados.md`
+- [x] Fuente real conectada: alertas de LinkedIn por email (probado de principio a fin en la copia privada)
+- [x] Eval con ofertas puntuadas a mano por el autor (resultados con datos reales, privados)
+- [x] Ampliaciones construidas en la copia privada: ver [«Ampliaciones»](#ampliaciones-copia-privada) (unas verificadas, otras pendientes de verificar)
 - [ ] Dos semanas de datos reales y sección de aprendizajes
 
 ## Cómo funciona
@@ -51,6 +52,24 @@ Es una herramienta de seguimiento de ofertas. El criterio (perfil y rúbrica) es
 | `tests/` | Pruebas que se ejecutan antes de cada ejecución |
 | `docs/` | Documentación técnica completa |
 | `.github/workflows/` | La ejecución diaria automática y el botón |
+
+## Ampliaciones (copia privada)
+
+El autor usa una copia privada con datos reales. Estas son las ampliaciones que ha construido sobre esta base y su estado, dicho con honestidad:
+
+| Ampliación | Qué hace | Estado |
+|---|---|---|
+| Núcleo con alertas de LinkedIn | Lee las alertas, puntúa con IA contra el CV y envía el email diario | **Verificado** en ejecución real |
+| Calibración con notas del autor | Compara las notas de la IA con las del autor (error medio, acierto ±2, falsos negativos) | **Verificado** |
+| Aviso de fallos | Si una ejecución falla, llega un email con el enlace al registro | **Verificado** |
+| Webs de empresas | Cada día revisa un lote de las páginas de empleo de una lista de empresas objetivo y añade las vacantes que encajan con el perfil | Descubrimiento **verificado**; evaluación de esas vacantes pendiente de verificar |
+| Segunda pasada | Si una oferta prometedora solo trae título, busca su descripción en la web oficial de la empresa y la puntúa de nuevo | Construido, **pendiente de verificar** |
+| Aprendizaje con ejemplos | Las notas que pone el autor se incluyen como ejemplos en cada evaluación | Construido, **pendiente de verificar** |
+| Candidatura a medida | Borrador de mensaje, logros del CV a destacar y a quién escribir (solo hechos del CV real; el autor revisa y envía) | Construido, **pendiente de verificar** |
+| Seguimiento y entrevista | Registro de candidaturas, recordatorio a los 7 días y guion de entrevista a demanda | Construido, **pendiente de verificar** |
+| Resumen semanal | Ofertas de la semana y habilidades pedidas que faltan en el CV | Construido, **pendiente de verificar** |
+
+Cómo se cuida el coste y la fiabilidad: una lista larga de empresas se revisa **por lotes rotativos** (unas pocas al día), la ejecución se **detiene y avisa** si la cuenta de la API se queda sin saldo, y las ofertas que no llegaron a evaluarse **no se marcan como vistas**, así que se reintentan.
 
 ## Cómo se configura (referencia)
 
@@ -107,5 +126,5 @@ python -m pytest -q tests
 ## Próximas mejoras
 
 - Juez calibrado: comparar varios modelos (Haiku vs Sonnet) en coste y precisión con el mismo eval.
-- Borrador de mensaje al reclutador para las ofertas con nota alta.
-- Aprender de las decisiones del usuario: si aplica o descarta, ajustar la rúbrica.
+- Verificar de extremo a extremo las ampliaciones pendientes y publicar su código en este repositorio.
+- Publicar un informe de precisión con datos inventados, para que se pueda reproducir sin datos privados.

@@ -110,7 +110,6 @@ def evaluar(cliente, o: Oferta, modelo: str = MODELO) -> dict:
     r = cliente.messages.create(
         model=modelo,
         max_tokens=800,
-        temperature=0,
         system=_sistema(),
         tools=[HERRAMIENTA],
         tool_choice={"type": "tool", "name": "evaluar_oferta"},

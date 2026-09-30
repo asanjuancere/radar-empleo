@@ -73,7 +73,7 @@ Código publicado para consulta y evaluación. Todos los derechos reservados: pa
 - **Reglas antes que IA.** Lo obvio se descarta sin llamar al modelo. Más barato y más predecible.
 - **Tool use con esquema JSON.** Claude devuelve siempre los mismos campos (nota, veredicto, encaje, carencias, probabilidad de entrevista), así las notas se pueden ordenar, medir y comparar.
 - **Prompt caching.** La rúbrica y el perfil se repiten en cada llamada; se cachean y esa parte cuesta ~10 % a partir de la segunda oferta.
-- **Temperatura 0.** La misma oferta debe recibir la misma nota.
+- **Coherencia medida, no supuesta.** Los modelos actuales no permiten fijar la aleatoriedad, así que la coherencia de las notas se apoya en un esquema fijo y una rúbrica estable, y se comprueba con los evals.
 - **Honestidad sobre la información.** Si una oferta solo trae título, la IA lo marca (`info_suficiente=false`) y la nota se presenta como orientativa.
 - **Privacidad.** El repo es público: no se publican ofertas, empresas ni notas, solo métricas agregadas. Los ids ya vistos se guardan como huella (hash). Las ofertas de ejemplo de los evals son inventadas.
 

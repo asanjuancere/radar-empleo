@@ -68,7 +68,7 @@ Antes de gastar dinero en IA, unas reglas baratas descartan lo evidente. Por eje
 El archivo `radar/puntuar.py` envía cada oferta a Claude junto con dos textos que configura cada persona: su **rúbrica** (qué es una oferta excelente y una mala) y su **perfil** (su experiencia). Decisiones de diseño:
 
 - **Salida estructurada (tool use).** En lugar de pedir texto libre, se obliga a Claude a responder con una herramienta que tiene un esquema fijo: nota de 0 a 10, veredicto, motivo, qué encaja, qué falta, probabilidad de entrevista, idea para el mensaje, si la información era suficiente, habilidades pedidas y nivel. Así los resultados siempre tienen los mismos campos y se pueden ordenar, contar y comparar.
-- **Temperatura 0.** La misma oferta recibe siempre la misma nota. Es imprescindible para poder medir cambios.
+- **Coherencia medida, no supuesta.** Los modelos actuales no permiten fijar la aleatoriedad, así que la coherencia de las notas se apoya en un esquema fijo y una rúbrica estable, y se comprueba con los evals (sección 13): si una misma oferta recibe notas distintas, el eval lo refleja.
 - **Prompt caching.** La rúbrica y el perfil son idénticos en todas las llamadas del día; se marcan como reutilizables y desde la segunda llamada esa parte cuesta aproximadamente una décima.
 - **Honestidad sobre la información.** Si la oferta solo trae título, el modelo debe marcar `info_suficiente=false` y no inventar habilidades.
 - **Aislamiento del criterio.** Rúbrica y perfil se leen de secretos de GitHub (o de un archivo local ignorado por git). El repositorio público solo contiene ejemplos ficticios.
